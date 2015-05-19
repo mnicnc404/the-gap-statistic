@@ -13,29 +13,34 @@ ln.wk = function(x, kb, method, ...)
 			}))))
 }   
 
-est.ln.wk = function(x, pca, max)
+ref.dist = function(x, pca)
 {	xp = x
 	if (pca)
-	{	x = as.matrix(x)
-		std.x = scale(x, center = T, scale = F)
-		v = svd(std.x)
-		xp = std.x %*% v		
-		xp = data.frame(xp)
+	{	std.x = scale(as.matrix(x), center = T, scale = F)
+		v = svd(std.x)$v
+		xp = data.frame(std.x %*% v)
 	}
     mins = apply(xp, 2, min)
 	maxs = apply(xp, 2, max)
    	ref.dist = sapply(1:length(mins), function(f) runif(nrow(xp), min = mins[f], max = maxs[f]))
-    if (pca)
-	{	ref.dist = as.matrix(ref.dist)
-		ref.dist = ref.dist %*% t(v)
-		ref.dist = data.frame(ref.dist) 
+    if (pca) 
+	{	ref.dist = data.frame(as.matrix(ref.dist) %*% t(v))
+		print(head(ref.dist))
+		ref.dist = sapply(1:length(ref.dist), function(f) ref.dist[,f] = ref.dist[,f] + mean(x[,f]))
+		print(head(ref.dist))
+		print(head(x))
 	}
-
+	return (ref.dist)
 }
+
+
 
 gap = function(data, max = 10, method = kmeans, pca = T, B = 50, ...)
 {   require(cluster)
 	x = data
 	if (is.matrix(x)) x = data.frame(x) 
-    
+	ln.w = e.ln.w = se = rep(0, 10)
+    for (b in 1:B)
+	{	
+	}
 }
