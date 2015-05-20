@@ -8,7 +8,7 @@ Originally it was a reproduction assignment assigned by my advisor. However, I f
 
 ## What's the Difference?
 
-### The Reference Distribution
+#### The Reference Distribution
 
 The original paper proposed two ways to generate reference distribution:
 
@@ -29,7 +29,7 @@ If we assign `pc` to `True`, the PC way will be used.
 
 Note: There's another [implementation](https://github.com/echen/gap-statistic) implemented by [echen](https://github.com/echen) on Github. Only the Unif way is implemented in [echen](https://github.com/echen)'s code.
 
-### Standard Deviation Calculation
+#### Standard Deviation Calculation
 
 The [paper](http://web.stanford.edu/~hastie/Papers/gap.pdf) says we should select a `k` where `1 < k < max` such that `Gap(k) <= Gap(k+1) - s(k+1)`, where s is some value multiplied by standard deviation of the within-group dispersion drawn from several samples. In [clusGap](http://stat.ethz.ch/R-manual/R-devel/library/cluster/html/clusGap.html), the built-in `var` function is used to calculate standard deviation (as we know, standard deviation is the square root of variance.) However, in the built-in `var` function, the denominator of the standard deviation is deducted by the degree of freedom (which is 1), which is different from the original algorithm (the denominator of the *standard deviation* proposed in the paper is not deducted by 1)!
 
