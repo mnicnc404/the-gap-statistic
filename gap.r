@@ -27,7 +27,7 @@ ref.dist = function(x, pc = T)
 	return (ref.dist)
 }
 
-gap = function(data, max = 10, method = kmeans, pc = T, B = 50, ...)
+gapStat = function(data, max = 10, method = kmeans, pc = T, B = 50, ...)
 {	x = data
 	if (is.matrix(x)) x = data.frame(x) 
 	ln.w = e.ln.w = s = oriGap = rep(0, 10)
