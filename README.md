@@ -4,6 +4,7 @@ An implementation of the gap statistic in R. The gap statistic, proposed by Robe
 
 Originally it was a reproduction assignment assigned by my advisor. However, I found that the existing implementation [clusGap](http://stat.ethz.ch/R-manual/R-devel/library/cluster/html/clusGap.html) in the [cluster](http://cran.r-project.org/web/packages/cluster/index.html) package is not completely align to the original algorithm, so I decided to push my implementation onto github for those who are interested.
 
+**Warning: the code is not robust.** If you encounter any problem, please contact me at Github or [send me email](mnicnc404@gmail.com).
 
 ## What's the Difference?
 
@@ -34,3 +35,36 @@ The [paper](http://web.stanford.edu/~hastie/Papers/gap.pdf) says we should selec
 
 Despite the fact that it may not cause big difference, I still decide to implement the original [paper](http://web.stanford.edu/~hastie/Papers/gap.pdf)'s version (not to use the built-in function `var`).
 
+## Example
+
+The usage is similar to [clusGap](http://stat.ethz.ch/R-manual/R-devel/library/cluster/html/clusGap.html). For instance:
+
+		set.seed(1)
+		x = c(rnorm(10, 0, 1), rnorm(10, 5, 1.5), rnorm(10, 10, 1))
+		y = c(rnorm(10, 10, 1), rnorm(10, 5, 1), rnorm(10, 0, 1))
+		data = cbind(x,y)
+		gapStat(data = data, max = 10, method = kmeans, pc = T, B = 50, iter.max = 10)
+		# The "iter.max" parameter is for the "kmeans" function.
+
+Note that you only have to specify the data like `gapStat(data)`, which gives you the same result.
+The result is:
+
+		logW    ElogW          S         Gap   GapMinusS
+		[1,] 3.932728 3.764804 0.06969463 -0.16792329 -0.23761792
+		[2,] 3.190214 3.120146 0.06970189 -0.07006775 -0.13976964
+		[3,] 2.477820 2.776090 0.06688969  0.29827007  0.23138038
+		[4,] 2.327328 2.577955 0.07746779  0.25062745  0.17315966
+		[5,] 2.215417 2.399859 0.07217596  0.18444261  0.11226665
+		[6,] 2.050635 2.274811 0.07124480  0.22417568  0.15293088
+		[7,] 1.974787 2.132784 0.08352412  0.15799618  0.07447206
+		[8,] 1.821773 2.018260 0.08526062  0.19648702  0.11122640
+		[9,] 1.664564 1.915915 0.09375918  0.25135046  0.15759129
+		[10,] 1.569001 1.766674 0.10887759  0.19767347  0.08879588
+		
+		$GlobalMaxClusterNum
+		[1] 3
+		
+		$TibsClusterNum
+		[1] 3
+
+You can `plot(data)` if you'd like to see the distribution of the generated data.

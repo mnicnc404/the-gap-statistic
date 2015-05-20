@@ -1,10 +1,10 @@
 ln.wk = function(x, kb = 1, method, ...)
 {	label = rep(1, nrow(x))
 	if (kb > 1) label = method(x, kb, ...)$cluster
-	return (log(sum(sapply(split(1:nrow(x), label), function(ki) {
-				pair = x[ki, ]
+	return (log(sum(vapply(split(1:nrow(x), label), function(ki) {
+				pair = x[ki, ,drop = F]
 				sum(dist(pair))/(2*nrow(pair))
-			}))))
+			}, 0))))
 }   
 
 ref.dist = function(x, pc = T)
