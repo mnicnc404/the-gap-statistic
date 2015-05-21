@@ -26,7 +26,7 @@ ref.dist = function(x, pc = T)
 	return (ref.dist)
 }
 
-gapStat = function(data, max = 10, method = kmeans, pc = T, B = 50, ...)
+gap.stat = function(data, max = 10, method = kmeans, pc = T, B = 50, tibs = T, ...)
 {	x = data
 	if (is.matrix(x)) x = data.frame(x) 
 	ln.w = e.ln.w = s = oriGap = rep(0, max)
@@ -39,13 +39,13 @@ gapStat = function(data, max = 10, method = kmeans, pc = T, B = 50, ...)
 	e.ln.w = colMeans(e.ln.ws)
 	for (k in 1:max) s[k] = sqrt((1 + 1/B) * sum((e.ln.ws[,k] - mean(e.ln.ws[,k]))^2)/B)
 	oriGap = e.ln.w - ln.w
-	globalMax = tibs = which.max(oriGap)
+	globalMax = tibsClus = which.max(oriGap)
 	## The following instructions are the original cluster number selection method proposed by Tibshirani. ##
 	## If we cannot find the smallest "k" where 1<k<max such that Gap(k) <= Gap(k+1) - s(k+1), k = max, which may implys that the maximal cluster specified is not big enough. ##
 	for (k in 1:(max-1)) 
 		 if (oriGap[k] >= (oriGap[k+1] - s[k+1]))
-		 {	tibs = k
+		 {	tibsClus = k
 			break
 		 }
-	return (list(Tabs = cbind(logW = ln.w, ElogW = e.ln.w, S = s, Gap = oriGap, GapMinusS = oriGap - s), GlobalMaxClusterNum = globalMax, TibsClusterNum = tibs))
+	return (list(Tabs = cbind(logW = ln.w, ElogW = e.ln.w, S = s, Gap = oriGap, GapMinusS = oriGap - s), GlobalMaxClusterNum = globalMax, TibsClusterNum = tibsClus, ClusterNum = if(tibs) tibsClus else globalMax))
 }
