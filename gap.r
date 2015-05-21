@@ -48,5 +48,5 @@ gapStat = function(data, max = 10, method = kmeans, pc = T, B = 50, ...)
 		 {	tibs = k
 			break
 		 }
-	return (list(Tabs = (cbind(logW = ln.w, ElogW = e.ln.w, S = s, Gap = oriGap, GapMinusS = oriGap - s)), GlobalMaxClusterNum = globalMax, TibsClusterNum = tibs))
+	return (list(Tabs = cbind(logW = ln.w, ElogW = e.ln.w, S = s, Gap = oriGap, GapMinusS = oriGap - s), GlobalMaxClusterNum = globalMax, TibsClusterNum = tibs))
 }
