@@ -1,6 +1,5 @@
-ln.wk = function(x, k = 1, method, ...)
-{	label = rep(1, nrow(x))
-	if (k > 1) label = method(x, k, ...)$cluster
+ln.wk = function(x, kb = 1, method, ...)
+{	label = method(x, kb, ...)$cluster
 	return (log(sum(sapply(split(1:nrow(x), label), function(ki) {
 				pair = x[ki, ,drop = F]
 				sum(dist(pair))/(2*nrow(pair))
@@ -48,5 +47,5 @@ gapStat = function(data, max = 10, method = kmeans, pc = T, B = 50, ...)
 		 {	tibs = k
 			break
 		 }
-	return (list(Tabs = (cbind(logW = ln.w, ElogW = e.ln.w, S = s, Gap = oriGap, GapMinusS = oriGap - s)), GlobalMaxClusterNum = globalMax, TibsClusterNum = tibs))
+	return (list(Tabs = cbind(logW = ln.w, ElogW = e.ln.w, S = s, Gap = oriGap, GapMinusS = oriGap - s), GlobalMaxClusterNum = globalMax, TibsClusterNum = tibs))
 }
