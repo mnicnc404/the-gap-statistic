@@ -1,6 +1,6 @@
-ln.wk = function(x, kb = 1, method, ...)
+ln.wk = function(x, k = 1, method, ...)
 {	label = rep(1, nrow(x))
-	if (kb > 1) label = method(x, kb, ...)$cluster
+	if (k > 1) label = method(x, k, ...)$cluster
 	return (log(sum(sapply(split(1:nrow(x), label), function(ki) {
 				pair = x[ki, ,drop = F]
 				sum(dist(pair))/(2*nrow(pair))
@@ -30,7 +30,7 @@ ref.dist = function(x, pc = T)
 gapStat = function(data, max = 10, method = kmeans, pc = T, B = 50, ...)
 {	x = data
 	if (is.matrix(x)) x = data.frame(x) 
-	ln.w = e.ln.w = s = oriGap = rep(0, 10)
+	ln.w = e.ln.w = s = oriGap = rep(0, max)
 	e.ln.ws = matrix(0, B, max)
 	for (k in 1:max) ln.w[k] = ln.wk(x, k, method, ...)
     for (b in 1:B)
