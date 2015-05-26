@@ -39,7 +39,7 @@ gap.stat = function(data, max = 10, method = kmeans, pc = T, B = 50, tibs = T, .
     for (b in 1:B)
 	{	r = ref.dist(x, pc)
 		if (is.hclust) r.hc = hclust(dist(r))
-		for (k in 1:max) e.ln.ws[b, k] = ln.wk(r, if (is.hclust) cutree(hc, k) else method(x, k, ...)$cluster)
+		for (k in 1:max) e.ln.ws[b, k] = ln.wk(r, if (is.hclust) cutree(r.hc, k) else method(r, k, ...)$cluster)
 	}
 	e.ln.w = colMeans(e.ln.ws)
 	for (k in 1:max) s[k] = sqrt((1 + 1/B) * sum((e.ln.ws[,k] - mean(e.ln.ws[,k]))^2)/B)
