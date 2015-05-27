@@ -25,9 +25,9 @@ ref.dist = function(x, pc = T)
 	return (ref.dist)
 }
 
-gap.stat = function(data, max = 10, method = kmeans, pc = T, B = 50, tibs = T, ...)
+gap.stat = function(data, max = 10, clusFUN = kmeans, pc = T, B = 50, tibs = T, ...)
 {	x = data
-	is.hclust = as.character(substitute(method)) == "hclust"
+	is.hclust = as.character(substitute(clusFUN)) == "hclust"
 	if (is.matrix(x)) x = data.frame(x) 
 	ln.w = e.ln.w = s = oriGap = rep(0, max)
 	e.ln.ws = matrix(0, B, max)
@@ -35,11 +35,11 @@ gap.stat = function(data, max = 10, method = kmeans, pc = T, B = 50, tibs = T, .
 	{	require(cluster)
 		hc = hclust(dist(x), ...)
 	}
-	for (k in 1:max) ln.w[k] = ln.wk(x, if (is.hclust) cutree(hc, k) else method(x, k, ...)$cluster)
+	for (k in 1:max) ln.w[k] = ln.wk(x, if (is.hclust) cutree(hc, k) else clusFUN(x, k, ...)$cluster)
     for (b in 1:B)
 	{	r = ref.dist(x, pc)
 		if (is.hclust) r.hc = hclust(dist(r))
-		for (k in 1:max) e.ln.ws[b, k] = ln.wk(r, if (is.hclust) cutree(r.hc, k) else method(r, k, ...)$cluster)
+		for (k in 1:max) e.ln.ws[b, k] = ln.wk(r, if (is.hclust) cutree(r.hc, k) else clusFUN(r, k, ...)$cluster)
 	}
 	e.ln.w = colMeans(e.ln.ws)
 	for (k in 1:max) s[k] = sqrt((1 + 1/B) * sum((e.ln.ws[,k] - mean(e.ln.ws[,k]))^2)/B)
