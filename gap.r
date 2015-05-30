@@ -1,7 +1,7 @@
 ln.wk = function(x, label)
 {	return (log(sum(sapply(split(1:nrow(x), label), function(ki) {
 				pair = x[ki, ,drop = F]
-				sum(dist(pair))/(2*nrow(pair))
+				sum(dist(pair)^2)/(2*nrow(pair))
 			}))))
 }   
 
@@ -17,10 +17,10 @@ ref.dist = function(x, pc = T)
    	ref.dist = sapply(1:length(mins), function(f) runif(nrow(xp), min = mins[f], max = maxs[f]))
 	#########
 	## The following code does not make any difference if the method to calculate distance between two observations is Euclidean Distance. ##
-    #if (pc) 
-	#{	ref.dist = data.frame(as.matrix(ref.dist) %*% t(v))
-	#	ref.dist = sapply(1:length(ref.dist), function(f) ref.dist[,f] = ref.dist[,f] + mean(x[,f]))
-	#}
+    if (pc) 
+	{	ref.dist = data.frame(as.matrix(ref.dist) %*% t(v))
+		ref.dist = sapply(1:length(ref.dist), function(f) ref.dist[,f] = ref.dist[,f] + mean(x[,f]))
+	}
 	########
 	return (ref.dist)
 }
