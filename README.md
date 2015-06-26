@@ -2,7 +2,7 @@
 
 An implementation of the gap statistic in R. The gap statistic, proposed by Robert Tibshirani, Guenther Walther, and Trevor Hastie, is a method for estimating the number of clusters in a set of data. For details, please check the original paper ["Estimating the number of clusters in a data set via the gap statistic"](http://web.stanford.edu/~hastie/Papers/gap.pdf).
 
-Originally it was a reproduction assignment assigned by my advisor. However, I found that the existing implementation [clusGap](http://stat.ethz.ch/R-manual/R-devel/library/cluster/html/clusGap.html) in the [cluster](http://cran.r-project.org/web/packages/cluster/index.html) package is not completely align to the original algorithm, so I decided to push my implementation onto github for those who are interested.
+I found that the existing implementation [clusGap](http://stat.ethz.ch/R-manual/R-devel/library/cluster/html/clusGap.html) in the [cluster](http://cran.r-project.org/web/packages/cluster/index.html) package is not completely align to the original algorithm, so I decided to push my implementation onto github for those who are interested.
 
 **Warning: the code is not robust.** If you encounter any problem with the code, please contact me at Github or [send me email](mnicnc404@gmail.com).
 
