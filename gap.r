@@ -12,10 +12,10 @@ ref.dist = function(x, pc = T)
 		v = svd(std.x)$v
 		xp = data.frame(std.x %*% v)
 	}
-    mins = apply(xp, 2, min)
+	mins = apply(xp, 2, min)
 	maxs = apply(xp, 2, max)
-   	ref.dist = sapply(1:length(mins), function(f) runif(nrow(xp), min = mins[f], max = maxs[f]))
-    if (pc) 
+	ref.dist = sapply(1:length(mins), function(f) runif(nrow(xp), min = mins[f], max = maxs[f]))
+	if (pc) 
 	{	ref.dist = data.frame(as.matrix(ref.dist) %*% t(v))
 		## The following code does not make any difference if the method to calculate distance between two observations is (squared) Euclidean Distance. ##
 		#ref.dist = sapply(1:length(ref.dist), function(f) ref.dist[,f] = ref.dist[,f] + mean(x[,f]))
@@ -34,7 +34,7 @@ gap.stat = function(data, max = 10, clusFUN = kmeans, pc = T, B = 50, tibs = T, 
 		hc = hclust(dist(x), ...)
 	}
 	for (k in 1:max) ln.w[k] = ln.wk(x, if (is.hclust) cutree(hc, k) else clusFUN(x, k, ...)$cluster)
-    for (b in 1:B)
+	for (b in 1:B)
 	{	r = ref.dist(x, pc)
 		if (is.hclust) r.hc = hclust(dist(r))
 		for (k in 1:max) e.ln.ws[b, k] = ln.wk(r, if (is.hclust) cutree(r.hc, k) else clusFUN(r, k, ...)$cluster)
