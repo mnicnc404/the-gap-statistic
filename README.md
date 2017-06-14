@@ -97,4 +97,4 @@ The [paper](http://web.stanford.edu/~hastie/Papers/gap.pdf) considers 4 other ap
 		s.stat(data)
 		CH.stat(data)
 
-The 4 functions takes same parameters. Note that these 4 functions does not take `pc` and `B` arguments.
+The 4 functions takes same parameters. Note that these 4 functions do not take `pc` and `B` arguments.
