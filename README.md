@@ -4,7 +4,7 @@ An implementation of the gap statistic in R. The gap statistic, proposed by Robe
 
 I found that the existing implementation [clusGap](http://stat.ethz.ch/R-manual/R-devel/library/cluster/html/clusGap.html) in the [cluster](http://cran.r-project.org/web/packages/cluster/index.html) package is not completely align to the original algorithm, so I decided to push my implementation onto github for those who are interested.
 
-**Warning: the code is not robust.** If you encounter any problem with the code, please contact me at Github or [send me email](mnicnc404@gmail.com).
+**Warning: the code is not robust.** If you encounter any problem with the code, please contact me at Github or [send me an email](mnicnc404@gmail.com).
 
 ## What's the Difference?
 
