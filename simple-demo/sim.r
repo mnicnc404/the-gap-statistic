@@ -1,3 +1,4 @@
+# setwd("path/to/this/dir")
 source("../gap.r")
 require("plot3D")
 set.seed(2)
